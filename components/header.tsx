@@ -205,7 +205,7 @@ export function Header() {
                         variants={itemVariants}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        href={process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/Satpal777'}
+                        href={process.env.NEXT_PUBLIC_GITHUB_URL || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-1.5 px-3 py-1.5 text-sm hover:opacity-70 transition-opacity"
@@ -245,7 +245,7 @@ export function Header() {
                         <Search className="w-4 h-4" />
                     </button>
                     <a
-                        href={process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/Satpal777'}
+                        href={process.env.NEXT_PUBLIC_GITHUB_URL || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 hover:opacity-70 transition-opacity"

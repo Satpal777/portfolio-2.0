@@ -54,7 +54,7 @@ export function Articles() {
                 <div className="text-sm opacity-70">
                     <p className="mb-4">Check out my latest articles on my blog.</p>
                     <a
-                        href="https://blogs.satpal.cloud"
+                        href={process.env.NEXT_PUBLIC_BLOG_URL || '#'}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity"
@@ -114,7 +114,7 @@ export function Articles() {
             </div>
             <div className="mt-6 text-center">
                 <a
-                    href="https://blogs.satpal.cloud"
+                    href={process.env.NEXT_PUBLIC_BLOG_URL || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm opacity-70 hover:opacity-100 transition-opacity inline-flex items-center gap-1"

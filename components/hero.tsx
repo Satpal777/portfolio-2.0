@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Linkedin, Github } from 'lucide-react';
+import { Mail, Linkedin, Github } from 'lucide-react';
 
 export function Hero() {
     const [isHovered, setIsHovered] = useState(false);
@@ -47,10 +47,9 @@ export function Hero() {
     };
 
     const contactLinks = [
-        { href: 'mailto:your.email@gmail.com', icon: Mail, label: 'Email' },
-        { href: 'tel:+1234567890', icon: Phone, label: 'Phone' },
-        { href: 'https://linkedin.com/in/satpalsinh-rana', icon: Linkedin, label: 'LinkedIn' },
-        { href: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/Satpal777', icon: Github, label: 'GitHub' },
+        { href: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`, icon: Mail, label: 'Email' },
+        { href: process.env.NEXT_PUBLIC_LINKEDIN_URL || '#', icon: Linkedin, label: 'LinkedIn' },
+        { href: process.env.NEXT_PUBLIC_GITHUB_URL || '#', icon: Github, label: 'GitHub' },
     ];
 
     return (

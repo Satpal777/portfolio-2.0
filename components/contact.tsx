@@ -5,9 +5,9 @@ import { Mail, Linkedin, Github, Globe, MapPin, ArrowRight } from 'lucide-react'
 
 export function Contact() {
     const socials = [
-        { name: 'GitHub', url: process.env.NEXT_PUBLIC_GITHUB_URL || 'https://github.com/Satpal777', icon: Github },
-        { name: 'LinkedIn', url: 'https://linkedin.com/in/satpalsinh-rana', icon: Linkedin },
-        { name: 'Portfolio', url: 'https://satpal.cloud', icon: Globe },
+        { name: 'GitHub', url: process.env.NEXT_PUBLIC_GITHUB_URL || '#', icon: Github },
+        { name: 'LinkedIn', url: process.env.NEXT_PUBLIC_LINKEDIN_URL || '#', icon: Linkedin },
+        { name: 'Portfolio', url: process.env.NEXT_PUBLIC_PORTFOLIO_URL || '#', icon: Globe },
     ];
 
     return (
@@ -39,12 +39,12 @@ export function Contact() {
                         <div className="space-y-4">
                             <div className="flex items-center gap-3 opacity-70">
                                 <MapPin className="w-5 h-5 text-teal-500" />
-                                <span>Ahmedabad, Gujarat, India</span>
+                                <span>{process.env.NEXT_PUBLIC_LOCATION}</span>
                             </div>
                             <div className="flex items-center gap-3 opacity-70">
                                 <Mail className="w-5 h-5 text-teal-500" />
-                                <a href="mailto:your.email@gmail.com" className="hover:text-teal-500 transition-colors">
-                                    your.email@gmail.com
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} className="hover:text-teal-500 transition-colors">
+                                    {process.env.NEXT_PUBLIC_EMAIL}
                                 </a>
                             </div>
                         </div>
@@ -81,7 +81,7 @@ export function Contact() {
                             ))}
 
                             <a
-                                href="mailto:your.email@gmail.com"
+                                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
                                 className="mt-4 flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-foreground text-background font-medium hover:opacity-90 transition-opacity"
                             >
                                 Send a Message
