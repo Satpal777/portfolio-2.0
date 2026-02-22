@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  --background: #f0f0ee;
+  --background-rgb: 240, 240, 238;
+  --foreground: #171717;
+  --border: #d9d9d6;
+  --color-teal-500: #0d9488;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --background-rgb: 10, 10, 10;
+    --foreground: #fafafa;
+    --border: #262626;
   }
+}
+
+.dark {
+  --background: #0a0a0a;
+  --background-rgb: 10, 10, 10;
+  --foreground: #fafafa;
+  --border: #262626;
+}
+
+.light {
+  --background: #f0f0ee;
+  --background-rgb: 240, 240, 238;
+  --foreground: #171717;
+  --border: #d9d9d6;
+  --color-teal-500: #0d9488;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Geist font variables */
+:root {
+  --font-geist-mono: var(--font-geist-mono);
+  --font-geist-pixel-square: var(--font-geist-pixel-square);
+}
+
+/* Custom text selection */
+::selection {
+  background-color: rgba(13, 148, 136, 0.25);
+  color: var(--foreground);
+}
+
+::-moz-selection {
+  background-color: rgba(13, 148, 136, 0.25);
+  color: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background-color: rgba(45, 212, 191, 0.25);
+    color: var(--foreground);
+  }
+
+  ::-moz-selection {
+    background-color: rgba(45, 212, 191, 0.25);
+    color: var(--foreground);
+  }
+}
+
+.dark ::selection {
+  background-color: rgba(45, 212, 191, 0.25);
+  color: var(--foreground);
+}
+
+.dark ::-moz-selection {
+  background-color: rgba(45, 212, 191, 0.25);
+  color: var(--foreground);
+}
+
+.light ::selection {
+  background-color: rgba(13, 148, 136, 0.25);
+  color: var(--foreground);
+}
+
+.light ::-moz-selection {
+  background-color: rgba(13, 148, 136, 0.25);
+  color: var(--foreground);
+}
+
+/* Clip-path theme transition animation */
+@keyframes clipPathReveal {
+  0% {
+    clip-path: circle(0% at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+
+  100% {
+    clip-path: circle(150% at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
 }
