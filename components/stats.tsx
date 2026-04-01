@@ -16,7 +16,7 @@ const staticStats: Stat[] = [
     { label: 'Technologies', value: 15, suffix: '+', icon: Code2 },
     { label: 'Projects Built', value: 5, suffix: '+', icon: FolderGit2 },
     { label: 'Certifications', value: 4, suffix: '', icon: Award },
-    { label: 'Articles Written', value: 14, suffix: '+', icon: PenLine },
+    { label: 'Articles Written', value: 21, suffix: '+', icon: PenLine },
 ];
 
 function AnimatedCounter({ value, suffix, isInView }: { value: number; suffix: string; isInView: boolean }) {
