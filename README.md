@@ -2,7 +2,7 @@
 
 A modern, responsive developer portfolio built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**. Features smooth Framer Motion animations, dark/light theme support with a clip-path reveal transition, and live Hashnode blog integration.
 
-> **Live:** [satpal.cloud](https://satpal.cloud)
+> **Live:** [satpal.cloud](https:www.//satpal.cloud)
 
 ---
 
