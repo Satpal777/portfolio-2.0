@@ -17,6 +17,7 @@ export async function GET() {
       query Publication {
         publication(host: "${process.env.NEXT_PUBLIC_HASHNODE_HOST}") {
           posts(first: 5) {
+            totalDocuments
             edges {
               node {
                 title
@@ -48,7 +49,10 @@ export async function GET() {
 
     const data = await response.json();
 
-    const articles = data.data?.publication?.posts?.edges?.map((edge: { node: HashnodeArticle }) => ({
+    const publication = data.data?.publication?.posts;
+    const totalArticles: number = publication?.totalDocuments ?? 0;
+
+    const articles = publication?.edges?.map((edge: { node: HashnodeArticle }) => ({
       title: edge.node.title,
       url: edge.node.url,
       publishedAt: edge.node.publishedAt,
@@ -56,7 +60,7 @@ export async function GET() {
       coverImage: edge.node.coverImage?.url,
     })) || [];
 
-    return NextResponse.json({ articles });
+    return NextResponse.json({ articles, totalArticles });
   } catch (error) {
     console.error('Error fetching articles:', error);
     return NextResponse.json({ articles: [], error: 'Failed to fetch articles' }, { status: 500 });

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Briefcase, Code2, FolderGit2, Award, PenLine } from 'lucide-react';
 
@@ -16,7 +16,6 @@ const staticStats: Stat[] = [
     { label: 'Technologies', value: 15, suffix: '+', icon: Code2 },
     { label: 'Projects Built', value: 5, suffix: '+', icon: FolderGit2 },
     { label: 'Certifications', value: 4, suffix: '', icon: Award },
-    { label: 'Articles Written', value: 21, suffix: '+', icon: PenLine },
 ];
 
 function AnimatedCounter({ value, suffix, isInView }: { value: number; suffix: string; isInView: boolean }) {
@@ -52,6 +51,28 @@ function AnimatedCounter({ value, suffix, isInView }: { value: number; suffix: s
 export function Stats() {
     const ref = useRef<HTMLDivElement>(null);
     const isInView = useInView(ref, { once: true, margin: '-50px' });
+    const [articleCount, setArticleCount] = useState<number>(52);
+
+    useEffect(() => {
+        fetch('/api/articles')
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.totalArticles) {
+                    setArticleCount(data.totalArticles);
+                }
+            })
+            .catch(() => {
+                /* silently fall back to 52 */
+            });
+    }, []);
+
+    const stats = useMemo<Stat[]>(
+        () => [
+            ...staticStats,
+            { label: 'Articles Written', value: articleCount, suffix: '', icon: PenLine },
+        ],
+        [articleCount],
+    );
 
     return (
         <section
@@ -60,7 +81,7 @@ export function Stats() {
             style={{ borderColor: 'var(--border)' }}
         >
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-                {staticStats.map((stat, index) => {
+                {stats.map((stat, index) => {
                     const Icon = stat.icon;
                     return (
                         <motion.div
