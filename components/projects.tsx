@@ -65,6 +65,15 @@ export function Projects() {
                     </div>
                 ))}
             </div>
+
+            <div className="mt-6 text-center">
+                <a
+                    href="/projects?from=portfolio"
+                    className="text-sm opacity-70 hover:opacity-100 transition-opacity inline-flex items-center gap-1"
+                >
+                    View project catalog <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+            </div>
         </section>
     );
 }

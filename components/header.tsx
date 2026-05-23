@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { ThemeToggle } from './theme-toggle';
 import { SearchModal } from './search-modal';
@@ -17,6 +18,8 @@ const navLinks = [
 const SECTION_IDS = navLinks.map(link => link.href.substring(1));
 
 export function Header() {
+    const pathname = usePathname();
+    const isSubpage = pathname !== '/';
     const [activeSection, setActiveSection] = useState<string>('');
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [showLogo, setShowLogo] = useState(false);
@@ -46,6 +49,14 @@ export function Header() {
     }, []);
 
     useEffect(() => {
+        if (isSubpage) {
+            if (pathname === '/projects') {
+                setActiveSection('projects');
+            } else {
+                setActiveSection('');
+            }
+            return;
+        }
         const handleScroll = () => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
@@ -80,7 +91,7 @@ export function Header() {
         handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [isSubpage, pathname]);
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -134,7 +145,7 @@ export function Header() {
                             pointerEvents: showLogo ? 'auto' : 'none',
                         }}
                     >
-                        <a href="#" className="hover:opacity-70 transition-opacity">
+                        <a href={isSubpage ? "/" : "#"} className="hover:opacity-70 transition-opacity">
                             ŘSS
                         </a>
                     </motion.div>
@@ -146,12 +157,15 @@ export function Header() {
                         className="flex items-center gap-6"
                     >
                         {navLinks.map((link) => {
-                            const isActive = activeSection === link.href.substring(1);
+                            const isActive = isSubpage 
+                                ? (pathname === '/projects' && link.href === '#projects') 
+                                : (activeSection === link.href.substring(1));
+                            const href = isSubpage ? `/${link.href}` : link.href;
                             return (
                                 <motion.a
                                     key={link.href}
                                     variants={itemVariants}
-                                    href={link.href}
+                                    href={href}
                                     className="text-sm transition-all duration-300 relative py-1"
                                     style={{
                                         color: isActive ? '#14b8a6' : 'inherit',
@@ -231,7 +245,7 @@ export function Header() {
                 }}
             >
                 <a
-                    href="#"
+                    href={isSubpage ? "/" : "#"}
                     className="text-xl font-bold tracking-tighter font-[family-name:var(--font-geist-pixel-square)] hover:opacity-70 transition-opacity"
                 >
                     ŘSS
@@ -268,11 +282,14 @@ export function Header() {
                 <div className="flex items-center justify-around px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
                     {navLinks.map((link) => {
                         const Icon = link.icon;
-                        const isActive = activeSection === link.href.substring(1);
+                        const isActive = isSubpage 
+                            ? (pathname === '/projects' && link.href === '#projects') 
+                            : (activeSection === link.href.substring(1));
+                        const href = isSubpage ? `/${link.href}` : link.href;
                         return (
                             <a
                                 key={link.href}
-                                href={link.href}
+                                href={href}
                                 className="flex flex-col items-center gap-1 px-2 py-1 rounded-lg transition-all"
                                 style={{
                                     color: isActive ? '#14b8a6' : 'inherit',
