@@ -1,0 +1,40 @@
+{
+  "articles": [
+    {
+      "title": "Linux from my Eyes",
+      "url": "https://blogs.satpal.cloud/linux-from-my-eyes",
+      "publishedAt": "Sun, 10 May 2026 12:09:05 GMT",
+      "excerpt": "The Filesystem That Doesn't Exist Every Linux user knows /proc. But almost nobody knows what it actually is. It's not a filesystem. There are no files on any disk. Everything inside it is generated on",
+      "coverImage": "https://cdn.hashnode.com/uploads/covers/6950d1ca85602739c40abd67/191298f2-2398-4469-90e9-db59bb7a2805.png"
+    },
+    {
+      "title": "JWT Authentication",
+      "url": "https://blogs.satpal.cloud/jwt-authentication",
+      "publishedAt": "Sat, 09 May 2026 13:53:15 GMT",
+      "excerpt": "Why we need Authentication in our application Imagine you walk into a private club. The bouncer doesn't just let you in because you look nice you need a membership card. In the digital world, Authenti",
+      "coverImage": "https://cdn.hashnode.com/uploads/covers/6950d1ca85602739c40abd67/b3d08699-1d67-471b-b5e8-a80089e91786.png"
+    },
+    {
+      "title": "Storing Uploaded Files and Serving Them in Express",
+      "url": "https://blogs.satpal.cloud/storing-and-serving-files",
+      "publishedAt": "Sat, 09 May 2026 13:42:27 GMT",
+      "excerpt": "As we have seen in previous article how to upload file using express and multer. Uploading a file is just the first half of the story. The other half where it lives and how you retrieve it. Where Uplo",
+      "coverImage": "https://cdn.hashnode.com/uploads/covers/6950d1ca85602739c40abd67/8dbdc54b-2751-4da8-b861-25f09e218cff.png"
+    },
+    {
+      "title": "Handling File Uploads in Express with Multer",
+      "url": "https://blogs.satpal.cloud/express-with-multer",
+      "publishedAt": "Sat, 09 May 2026 13:33:31 GMT",
+      "excerpt": "Why File Uploads Need Middleware When you submit a plain HTML form name, email, that sort of thing the browser encodes everything as application/x-www-form-urlencoded. It's a simple key=value string,",
+      "coverImage": "https://cdn.hashnode.com/uploads/covers/6950d1ca85602739c40abd67/e52baf60-10e9-485f-ac74-43dbf35fd023.png"
+    },
+    {
+      "title": "Sessions vs JWT vs Cookies",
+      "url": "https://blogs.satpal.cloud/sessions-vs-jwt-vs-cookies",
+      "publishedAt": "Sat, 09 May 2026 13:08:07 GMT",
+      "excerpt": "You've seen the Stack Overflow answers. You've skimmed the Medium posts. You know the drill sessions store state on the server, JWTs are stateless, cookies are just the transport. Got it. But then you",
+      "coverImage": "https://cdn.hashnode.com/uploads/covers/6950d1ca85602739c40abd67/7c359488-2ea5-40c8-95e3-2a68a854e5d7.png"
+    }
+  ],
+  "totalArticles": 20
+}
