@@ -1,6 +1,6 @@
 # Satpalsinh Rana — Portfolio
 
-A modern, responsive developer portfolio built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**. Features smooth Framer Motion animations, dark/light theme support with a clip-path reveal transition, and live Hashnode blog integration.
+A modern, responsive developer portfolio built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**. Features smooth Framer Motion animations and dark/light theme support with a clip-path reveal transition.
 
 > **Live:** [satpal.cloud](https:www.//satpal.cloud)
 
@@ -15,7 +15,7 @@ A modern, responsive developer portfolio built with **Next.js 16**, **React 19**
 | **Experience**     | Work history timeline                              |
 | **Skills**         | Tech stack overview                                |
 | **Projects**       | Highlighted project cards                          |
-| **Articles**       | Latest posts fetched from Hashnode via API route    |
+| **Articles**       | Latest posts    |
 | **Education**      | Academic background                                |
 | **Certifications** | Certificate cards with image modal                 |
 | **Contact**        | Social links & CTA                                 |
@@ -31,7 +31,7 @@ Additional components: **Header** (sticky nav with scroll-spy & keyboard shortcu
 - **Animations** — Framer Motion
 - **Icons** — Lucide React
 - **Fonts** — Geist Sans, Geist Mono, Geist Pixel Square
-- **API** — Hashnode GraphQL (articles)
+- **API** — (articles)
 - **Package Manager** — Bun
 
 ---
@@ -85,7 +85,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 Create a `.env.local` file in the project root:
 
 ```env
-NEXT_PUBLIC_HASHNODE_HOST=your-hashnode-blog.hashnode.dev
+RSS_FEED_URL=https://blogs.satpal.cloud/rss.xml
 NEXT_PUBLIC_GITHUB_URL=https://github.com/Satpal777
 ```
 
@@ -96,7 +96,7 @@ NEXT_PUBLIC_GITHUB_URL=https://github.com/Satpal777
 ```
 portfolio/
 ├── app/
-│   ├── api/articles/route.ts   # Hashnode GraphQL API route
+│   ├── api/articles/route.ts   # RSS articles API route
 │   ├── globals.css             # Theme tokens & global styles
 │   ├── layout.tsx              # Root layout (fonts, ThemeProvider)
 │   └── page.tsx                # Home page (all sections)
@@ -107,7 +107,7 @@ portfolio/
 │   ├── experience.tsx          # Work experience timeline
 │   ├── skills.tsx              # Skills grid
 │   ├── projects.tsx            # Project showcase cards
-│   ├── articles.tsx            # Blog articles (Hashnode)
+│   ├── articles.tsx            # Blog articles (RSS)
 │   ├── education.tsx           # Education section
 │   ├── certifications.tsx      # Certs with image modal
 │   ├── contact.tsx             # Contact & socials
