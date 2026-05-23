@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useRef, useEffect, ReactNode } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import { useState, useRef, ReactNode } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Github, Play, Copy, Check, Terminal } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 // --- Types & Data ---
 
@@ -147,7 +148,7 @@ const projectsData: Project[] = [
 function CopyNpmCommand({ command }: { command: string }) {
     const [copied, setCopied] = useState(false);
     return (
-        <Magnetic>
+        <Magnetic className="w-full sm:w-auto">
             <button
                 onClick={(e) => {
                     e.preventDefault();
@@ -155,10 +156,10 @@ function CopyNpmCommand({ command }: { command: string }) {
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                 }}
-                className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-white/20 bg-zinc-900/50 text-white font-mono text-xs md:text-sm tracking-wide hover:bg-white/10 transition-colors"
+                className="inline-flex w-full sm:w-auto min-w-0 items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 bg-zinc-900/50 text-white font-mono text-[11px] sm:text-xs md:text-sm tracking-normal sm:tracking-wide hover:bg-white/10 transition-colors"
             >
                 <Terminal className="w-4 h-4 opacity-50" />
-                {command}
+                <span className="min-w-0 truncate">{command}</span>
                 {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 opacity-50" />}
             </button>
         </Magnetic>
@@ -167,7 +168,7 @@ function CopyNpmCommand({ command }: { command: string }) {
 
 // --- Magnetic Component ---
 
-function Magnetic({ children }: { children: ReactNode }) {
+function Magnetic({ children, className = "inline-block" }: { children: ReactNode; className?: string }) {
     const ref = useRef<HTMLDivElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -187,7 +188,7 @@ function Magnetic({ children }: { children: ReactNode }) {
     return (
         <motion.div
             ref={ref}
-            className="relative magnetic inline-block"
+            className={`relative magnetic ${className}`}
             onMouseMove={handleMouse}
             onMouseLeave={reset}
             animate={{ x: position.x, y: position.y }}
@@ -200,7 +201,7 @@ function Magnetic({ children }: { children: ReactNode }) {
 
 // --- Sticky Stacking Card Component ---
 
-function StackedCard({ project, index, total }: { project: Project, index: number, total: number }) {
+function StackedCard({ project, index }: { project: Project, index: number }) {
     const containerRef = useRef<HTMLDivElement>(null);
     
     // We track the scroll progress of THIS specific container
@@ -275,13 +276,13 @@ function StackedCard({ project, index, total }: { project: Project, index: numbe
                     </p>
 
                     {/* Action Links */}
-                    <div className="flex flex-wrap gap-6 mt-auto md:mt-0">
-                        <Magnetic>
+                    <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6 mt-auto md:mt-0">
+                        <Magnetic className="w-full sm:w-auto">
                             <a
                                 href={project.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono text-sm uppercase tracking-widest font-bold hover:scale-105 transition-all ${
+                                className={`inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-mono text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest font-bold hover:scale-105 transition-all whitespace-nowrap ${
                                     project.url.includes('youtu') 
                                     ? 'bg-[#ff0000] text-white hover:bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.3)]' 
                                     : 'bg-white text-black hover:bg-gray-200'
@@ -301,36 +302,36 @@ function StackedCard({ project, index, total }: { project: Project, index: numbe
                             </a>
                         </Magnetic>
                         {project.videoUrl && (
-                            <Magnetic>
+                            <Magnetic className="w-full sm:w-auto">
                                 <a
                                     href={project.videoUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-mono text-sm uppercase tracking-widest font-bold hover:scale-105 transition-all bg-[#ff0000] text-white hover:bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.3)]"
+                                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-mono text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest font-bold hover:scale-105 transition-all bg-[#ff0000] text-white hover:bg-red-600 shadow-[0_0_20px_rgba(255,0,0,0.3)] whitespace-nowrap"
                                 >
                                     <Play className="w-4 h-4 fill-current" />
                                     Watch Video
                                 </a>
                             </Magnetic>
                         )}
-                        <Magnetic>
+                        <Magnetic className="w-full sm:w-auto">
                             <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white font-mono text-sm uppercase tracking-widest font-bold hover:bg-white/10 transition-colors"
+                                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 text-white font-mono text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest font-bold hover:bg-white/10 transition-colors whitespace-nowrap"
                             >
                                 <Github className="w-4 h-4" />
                                 {project.githubBackend ? 'Frontend' : 'Source'}
                             </a>
                         </Magnetic>
                         {project.githubBackend && (
-                            <Magnetic>
+                            <Magnetic className="w-full sm:w-auto">
                                 <a
                                     href={project.githubBackend}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 text-white font-mono text-sm uppercase tracking-widest font-bold hover:bg-white/10 transition-colors"
+                                    className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 text-white font-mono text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest font-bold hover:bg-white/10 transition-colors whitespace-nowrap"
                                 >
                                     <Github className="w-4 h-4" />
                                     {project.githubBackend.toLowerCase().includes('docs') ? 'Docs Source' : 'Backend'}
@@ -351,17 +352,9 @@ function StackedCard({ project, index, total }: { project: Project, index: numbe
 
 export default function ProjectsShowcase() {
     const [activeSection, setActiveSection] = useState<string>('nextnews');
-    const [showBackBtn, setShowBackBtn] = useState(false);
-
-    // Check if navigated from home
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('from') === 'home' || params.get('from') === 'portfolio') {
-                setShowBackBtn(true);
-            }
-        }
-    }, []);
+    const searchParams = useSearchParams();
+    const from = searchParams.get('from');
+    const showBackBtn = from === 'home' || from === 'portfolio';
 
     // Scroll tracker for Catalog Index (Mathematical sync)
     const { scrollY } = useScroll();
@@ -487,7 +480,6 @@ export default function ProjectsShowcase() {
                         key={project.id} 
                         project={project} 
                         index={index + 10} 
-                        total={projectsData.length} 
                     />
                 ))}
             </main>
