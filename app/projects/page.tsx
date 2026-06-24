@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, ReactNode } from 'react';
+import { useState, useRef, ReactNode, Suspense } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Github, Play, Copy, Check, Terminal } from 'lucide-react';
 import Image from 'next/image';
@@ -348,13 +348,28 @@ function StackedCard({ project, index }: { project: Project, index: number }) {
     );
 }
 
+// --- Back Button (isolated so useSearchParams is inside Suspense) ---
+
+function BackButton() {
+    const searchParams = useSearchParams();
+    const from = searchParams.get('from');
+    if (from !== 'home' && from !== 'portfolio') return null;
+    return (
+        <div className="pointer-events-auto">
+            <Magnetic>
+                <Link href="/" className="flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
+                    <ArrowLeft className="w-4 h-4" />
+                    Back to Home
+                </Link>
+            </Magnetic>
+        </div>
+    );
+}
+
 // --- Main Page ---
 
 export default function ProjectsShowcase() {
     const [activeSection, setActiveSection] = useState<string>('nextnews');
-    const searchParams = useSearchParams();
-    const from = searchParams.get('from');
-    const showBackBtn = from === 'home' || from === 'portfolio';
 
     // Scroll tracker for Catalog Index (Mathematical sync)
     const { scrollY } = useScroll();
@@ -405,16 +420,9 @@ export default function ProjectsShowcase() {
                         </Link>
                     </Magnetic>
                 </div>
-                {showBackBtn && (
-                    <div className="pointer-events-auto">
-                        <Magnetic>
-                            <Link href="/" className="flex items-center gap-2 text-xs md:text-sm font-mono uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
-                                <ArrowLeft className="w-4 h-4" />
-                                Back to Home
-                            </Link>
-                        </Magnetic>
-                    </div>
-                )}
+                <Suspense>
+                    <BackButton />
+                </Suspense>
             </header>
 
             {/* Sticky Catalog Index (Desktop) */}
