@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
-    const { theme, setTheme } = useTheme();
+    const { theme, resolvedTheme, setTheme } = useTheme();
     const [isAnimating, setIsAnimating] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -40,7 +40,7 @@ export function ThemeToggle() {
             height: 100vh;
             pointer-events: none;
             z-index: -1;
-            background: ${theme === 'dark' ? '#f0f0ee' : '#0a0a0a'};
+            background: ${resolvedTheme === 'dark' ? '#f0f0ee' : '#0a0a0a'};
         `;
 
         document.body.appendChild(overlay);
@@ -52,7 +52,7 @@ export function ThemeToggle() {
 
         // Change theme after a short delay
         setTimeout(() => {
-            setTheme(theme === 'dark' ? 'light' : 'dark');
+            setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
         }, 50);
 
         // Clean up
@@ -66,7 +66,7 @@ export function ThemeToggle() {
         return <div className="w-5 h-5" />;
     }
 
-    const isDark = theme === 'dark';
+    const isDark = resolvedTheme === 'dark';
 
     return (
         <motion.button
