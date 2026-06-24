@@ -1,8 +1,8 @@
-# Satpalsinh Rana — Portfolio
+# Satpalsinh Rana
 
 A modern, responsive developer portfolio built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**. Features smooth Framer Motion animations and dark/light theme support with a clip-path reveal transition.
 
-> **Live:** [satpal.cloud](https:www.//satpal.cloud)
+> **Live:** [satpal.cloud](https://wwww.satpal.cloud)
 
 ---
 
