@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowUpRight, Github, Play, Copy, Check, Terminal } from 'lu
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { ShaderBackdrop } from '@/components/shader-backdrop';
 
 // --- Types & Data ---
 
@@ -402,8 +403,15 @@ export default function ProjectsShowcase() {
 
     return (
         <div className="bg-[#050505] min-h-screen font-sans relative selection:bg-white/20">
+            {/* Live shader backdrop — deep teal/indigo drift under everything */}
+            <ShaderBackdrop
+                colors={['#050505', '#134e4a', '#1e1b4b', '#0f172a']}
+                speed={0.15}
+                className="fixed inset-0 pointer-events-none opacity-60 z-0"
+            />
+
             {/* Grid Vector Background */}
-            <div 
+            <div
                 className="fixed inset-0 pointer-events-none opacity-[0.02] z-0"
                 style={{
                     backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,

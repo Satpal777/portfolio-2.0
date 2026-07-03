@@ -135,35 +135,6 @@ h6 {
   animation-play-state: paused;
 }
 
-/* Aurora blobs drifting behind the hero */
-@keyframes auroraFloat {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(40px, -50px) scale(1.15);
-  }
-
-  66% {
-    transform: translate(-30px, 30px) scale(0.9);
-  }
-}
-
-.aurora-blob {
-  animation: auroraFloat 14s ease-in-out infinite;
-}
-
-.aurora-blob-2 {
-  animation: auroraFloat 18s ease-in-out infinite reverse;
-}
-
-.aurora-blob-3 {
-  animation: auroraFloat 22s ease-in-out infinite;
-  animation-delay: -7s;
-}
-
 /* Gentle idle float for the hero logo */
 @keyframes logoFloat {
   0%,
@@ -182,9 +153,6 @@ h6 {
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
-  .aurora-blob,
-  .aurora-blob-2,
-  .aurora-blob-3,
   .logo-float {
     animation: none !important;
   }

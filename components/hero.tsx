@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Linkedin, Github, ChevronDown } from 'lucide-react';
+import { ShaderBackdrop } from './shader-backdrop';
 
 const EASE = [0.25, 0.1, 0.25, 1] as const;
 
@@ -115,12 +116,11 @@ export function Hero() {
             className="relative flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24 border-b overflow-hidden"
             style={{ borderColor: 'var(--border)' }}
         >
-            {/* Aurora blobs drifting behind everything */}
-            <div className="absolute inset-0 pointer-events-none" aria-hidden>
-                <div className="aurora-blob absolute -top-24 -left-24 w-96 h-96 rounded-full bg-teal-500/20 blur-[100px]" />
-                <div className="aurora-blob-2 absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-purple-500/15 blur-[100px]" />
-                <div className="aurora-blob-3 absolute -bottom-24 left-1/3 w-72 h-72 rounded-full bg-blue-500/15 blur-[90px]" />
-            </div>
+            {/* Live mesh gradient shader drifting behind everything */}
+            <ShaderBackdrop
+                speed={0.3}
+                className="absolute inset-0 pointer-events-none opacity-50"
+            />
 
             {/* Pixel Grid Background */}
             <motion.div
