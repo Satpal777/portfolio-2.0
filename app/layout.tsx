@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistPixelSquare } from "geist/font/pixel";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Effects } from "@/components/effects";
 
 export const metadata: Metadata = {
   title: "Satpalsinh",
@@ -24,6 +25,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
+          <Effects />
           {children}
         </ThemeProvider>
       </body>

@@ -1,7 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Calendar } from 'lucide-react';
+import { SectionHeading } from './reveal';
+
+const EASE = [0.25, 0.1, 0.25, 1] as const;
 
 interface Article {
     title: string;
@@ -68,14 +72,18 @@ export function Articles() {
 
     return (
         <section id="articles" className="px-4 sm:px-6 py-12 sm:py-16 border-b" style={{ borderColor: 'var(--border)' }}>
-            <h2 className="text-2xl font-medium mb-8">Articles</h2>
+            <SectionHeading number="04" title="Articles" />
             <div className="space-y-0">
                 {articles.map((article, index) => (
-                    <a
+                    <motion.a
                         key={index}
                         href={article.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-40px' }}
+                        transition={{ duration: 0.5, delay: index * 0.08, ease: EASE }}
                         className="block py-6 border-b last:border-b-0 group transition-opacity hover:opacity-70"
                         style={{ borderColor: 'var(--border)' }}
                     >
@@ -85,7 +93,7 @@ export function Articles() {
                                     <img
                                         src={article.coverImage}
                                         alt={article.title}
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                     />
                                 </div>
                             )}
@@ -109,7 +117,7 @@ export function Articles() {
                                 )}
                             </div>
                         </div>
-                    </a>
+                    </motion.a>
                 ))}
             </div>
             <div className="mt-6 text-center">
