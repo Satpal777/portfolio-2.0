@@ -1,7 +1,5 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { ArrowUpRight, Calendar } from 'lucide-react';
+import articlesData from '@/data/articles.json';
 
 interface Article {
     title: string;
@@ -11,43 +9,13 @@ interface Article {
     coverImage?: string;
 }
 
+// Server component: articles come straight from the bundled JSON so titles
+// and excerpts are present in the prerendered HTML for search engines,
+// instead of being fetched client-side after hydration.
+const articles: Article[] = articlesData.articles ?? [];
+
 export function Articles() {
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        async function fetchArticles() {
-            try {
-                const response = await fetch('/api/articles');
-
-                if (!response.ok) {
-                    throw new Error('Failed to fetch articles');
-                }
-
-                const data = await response.json();
-                setArticles(data.articles || []);
-            } catch (err) {
-                setError('Unable to load articles');
-                console.error('Error fetching articles:', err);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchArticles();
-    }, []);
-
-    if (loading) {
-        return (
-            <section id="articles" className="px-4 sm:px-6 py-12 sm:py-16 border-b" style={{ borderColor: 'var(--border)' }}>
-                <h2 className="text-2xl font-medium mb-8">Articles</h2>
-                <div className="text-sm opacity-50">Loading articles...</div>
-            </section>
-        );
-    }
-
-    if (error || articles.length === 0) {
+    if (articles.length === 0) {
         return (
             <section id="articles" className="px-4 sm:px-6 py-12 sm:py-16 border-b" style={{ borderColor: 'var(--border)' }}>
                 <h2 className="text-2xl font-medium mb-8">Articles</h2>
