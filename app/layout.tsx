@@ -108,6 +108,20 @@ const personJsonLd = {
   ].filter(Boolean),
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Satpalsinh Rana",
+  alternateName: ["Satpal Rana Portfolio", "satpal.cloud"],
+  url: siteUrl,
+  description: siteDescription,
+  author: {
+    "@type": "Person",
+    name: "Satpalsinh Rana",
+    url: siteUrl,
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -119,6 +133,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <ThemeProvider
           attribute="class"
