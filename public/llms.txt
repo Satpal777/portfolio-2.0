@@ -1,0 +1,43 @@
+# Satpalsinh Rana
+
+> Satpalsinh Rana is a Software Engineer based in Ahmedabad, Gujarat, India,
+> specializing in building real-time systems, web applications, and
+> cross-platform desktop applications with Angular, React, Next.js, Node.js,
+> and Electron.js. This is his personal portfolio at https://www.satpal.cloud.
+
+## About
+
+- Name: Satpalsinh Rana
+- Role: Software Engineer at Asite Solutions Pvt. Ltd. (since June 2023)
+- Location: Ahmedabad, Gujarat, India
+- Education: B.E. in Information Technology, Government Engineering College, Modasa (2019–2023)
+- Core skills: JavaScript, TypeScript, Angular, React.js, Next.js, RxJS, NgRx, Node.js, Express.js, Electron.js, MongoDB, SQLite
+- Focus areas: real-time systems, WebSockets, event streaming, desktop application development, authentication/SSO
+- Availability: open to collaboration and new projects
+
+## Key pages
+
+- [Portfolio home](https://www.satpal.cloud): overview, experience, skills, and contact
+- [About](https://www.satpal.cloud/about): full biography and background
+- [Projects](https://www.satpal.cloud/projects): full project catalog
+- [Blog](https://blogs.satpal.cloud): articles on JavaScript internals, system design, and engineering
+
+## Selected projects (case studies)
+
+- [NextNews](https://www.satpal.cloud/projects/nextnews): real-time news aggregation with AI summarization (Next.js, Groq, LLaMA)
+- [Aura Auth](https://www.satpal.cloud/projects/aura-auth): OIDC-compliant Single Sign-On authentication server (Node.js, OAuth 2.0, OIDC)
+- [Lively](https://www.satpal.cloud/projects/lively): real-time location tracking on Kafka event streams (React, Kafka, Bun, WebSockets)
+- [Emitly](https://www.satpal.cloud/projects/emitly): high-performance real-time WebSocket messaging platform (Node.js, WebSockets)
+- [Ratio'd](https://www.satpal.cloud/projects/ratiod): real-time polling platform (Next.js, React)
+- [ChainMoj](https://www.satpal.cloud/projects/chainmoj): full-stack movie ticket booking with live seat selection (React, Node.js, MongoDB)
+- [Carpool](https://www.satpal.cloud/projects/carpool): carpool matching with route visualization (AngularJS, Node.js, Leaflet)
+- [Aetheria](https://www.satpal.cloud/projects/aetheria): cosmic data visualization dashboard (React, Three.js, WebGL)
+- [Tik-Tak](https://www.satpal.cloud/projects/tiktak): Tic-Tac-Toe with game AI (React)
+- [TSS](https://www.satpal.cloud/projects/tss): lightweight CSS utility framework published on npm
+
+## Contact and profiles
+
+- Portfolio: https://www.satpal.cloud
+- Blog: https://blogs.satpal.cloud
+- GitHub: https://github.com/Satpal777
+- LinkedIn: https://www.linkedin.com/in/satpalsinhrana/

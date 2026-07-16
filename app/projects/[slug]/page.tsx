@@ -68,6 +68,21 @@ export default async function ProjectCasePage({
         url: `${siteUrl}/projects/${project.slug}`,
     };
 
+    // Extract a YouTube ID from youtu.be/<id> or youtube.com/watch?v=<id>
+    const youTubeId = project.videoUrl?.match(/(?:youtu\.be\/|v=)([\w-]{11})/)?.[1];
+    const videoJsonLd = youTubeId
+        ? {
+              '@context': 'https://schema.org',
+              '@type': 'VideoObject',
+              name: `${project.title} — Demo`,
+              description: project.tagline,
+              thumbnailUrl: `https://img.youtube.com/vi/${youTubeId}/maxresdefault.jpg`,
+              uploadDate: '2025-01-01',
+              contentUrl: project.videoUrl,
+              embedUrl: `https://www.youtube.com/embed/${youTubeId}`,
+          }
+        : null;
+
     const others = projectCases.filter((p) => p.slug !== project.slug).slice(0, 3);
 
     return (
@@ -84,6 +99,12 @@ export default async function ProjectCasePage({
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(creativeWorkJsonLd) }}
                 />
+                {videoJsonLd && (
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoJsonLd) }}
+                    />
+                )}
 
                 <Header />
 
