@@ -9,6 +9,7 @@ const projects = [
         tech: 'Next.js, NewsAPI, Groq, LLaMA, shadcn/ui',
         github: 'https://github.com/Satpal777/NextNews',
         url: 'https://github.com/Satpal777/NextNews',
+        caseStudy: '/projects/nextnews',
     },
     {
         title: 'Carpool',
@@ -16,6 +17,7 @@ const projects = [
         tech: 'AngularJS, Node.js, Express.js, MongoDB, Leaflet',
         github: 'https://github.com/Satpal777/Carpool',
         url: 'https://github.com/Satpal777/Carpool',
+        caseStudy: '/projects/carpool',
     },
 ];
 
@@ -39,6 +41,14 @@ export function Projects() {
                                 <p className="text-sm opacity-70 mb-2">{project.description}</p>
                                 <div className="flex items-center gap-3 mt-4">
                                     <p className="text-xs opacity-50 font-[family-name:var(--font-geist-mono)] flex-1">{project.tech}</p>
+                                    <a
+                                        href={project.caseStudy}
+                                        className="relative z-10 opacity-50 hover:opacity-100 transition-opacity flex items-center gap-1.5 text-xs"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <span>Case Study</span>
+                                        <ArrowUpRight className="w-3.5 h-3.5" />
+                                    </a>
                                     <a
                                         href={project.github}
                                         target="_blank"
