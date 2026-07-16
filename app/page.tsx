@@ -9,6 +9,7 @@ import { Certifications } from '@/components/certifications';
 import { Contact } from '@/components/contact';
 import { Footer } from '@/components/footer';
 import { Stats } from '@/components/stats';
+import { FAQ } from '@/components/faq';
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Articles />
         <Education />
         <Certifications />
+        <FAQ />
         <Contact />
         <Footer />
       </div>

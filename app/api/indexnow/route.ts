@@ -11,6 +11,7 @@ const HOST = 'www.satpal.cloud';
 const KEY = 'b4c882a346938dbd5ea305817625b8e0';
 const URLS = [
   `https://${HOST}/`,
+  `https://${HOST}/about`,
   `https://${HOST}/projects`,
   ...projectCases.map((p) => `https://${HOST}/projects/${p.slug}`),
 ];
