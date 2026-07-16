@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { projectCases } from '@/data/projects';
 
 // IndexNow instantly notifies Bing, Yandex, Seznam and Naver about new or
 // updated URLs. Hit GET /api/indexnow after a deploy to submit the site.
@@ -8,7 +9,11 @@ export const dynamic = 'force-dynamic';
 
 const HOST = 'www.satpal.cloud';
 const KEY = 'b4c882a346938dbd5ea305817625b8e0';
-const URLS = [`https://${HOST}/`, `https://${HOST}/projects`];
+const URLS = [
+  `https://${HOST}/`,
+  `https://${HOST}/projects`,
+  ...projectCases.map((p) => `https://${HOST}/projects/${p.slug}`),
+];
 
 export async function GET() {
   try {

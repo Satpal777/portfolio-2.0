@@ -9,12 +9,66 @@ interface Article {
     coverImage?: string;
 }
 
-// Server component: articles come straight from the bundled JSON so titles
-// and excerpts are present in the prerendered HTML for search engines,
-// instead of being fetched client-side after hydration.
-const articles: Article[] = articlesData.articles ?? [];
+const FEED_URL = process.env.RSS_FEED_URL || 'https://blogs.satpal.cloud/rss.xml';
 
-export function Articles() {
+function decodeEntities(s: string): string {
+    return s
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&apos;/g, "'");
+}
+
+function parseRss(xml: string): Article[] {
+    const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
+
+    return items
+        .map((item) => {
+            const pick = (tag: string) => {
+                const m = item.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`));
+                return (m?.[1] ?? '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim();
+            };
+
+            const content = pick('content:encoded') || pick('description');
+            const coverImage =
+                item.match(/<enclosure[^>]+url="([^"]+)"/)?.[1] ||
+                content.match(/<img[^>]+src="([^"]+)"/)?.[1];
+            const text = decodeEntities(
+                content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+            );
+
+            return {
+                title: decodeEntities(pick('title')),
+                url: pick('link'),
+                publishedAt: pick('pubDate'),
+                excerpt: text ? `${text.slice(0, 200)}` : undefined,
+                coverImage,
+            };
+        })
+        .filter((a) => a.title && a.url);
+}
+
+// Fetched at build time and revalidated daily, so the homepage always shows
+// the latest posts in prerendered (indexable) HTML. Falls back to the
+// bundled snapshot if the feed is unreachable.
+async function getArticles(): Promise<Article[]> {
+    try {
+        const res = await fetch(FEED_URL, { next: { revalidate: 86400 } });
+        if (res.ok) {
+            const fresh = parseRss(await res.text());
+            if (fresh.length > 0) return fresh.slice(0, 5);
+        }
+    } catch {
+        // fall through to the bundled snapshot
+    }
+    return articlesData.articles as Article[];
+}
+
+export async function Articles() {
+    const articles = await getArticles();
+
     if (articles.length === 0) {
         return (
             <section id="articles" className="px-4 sm:px-6 py-12 sm:py-16 border-b" style={{ borderColor: 'var(--border)' }}>
